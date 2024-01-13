@@ -23,7 +23,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Coverage
       id: jacoco
-      uses: actions/upload-artifact@v3
+      uses: madrapps/jacoco-report@v1.3
       with:
-        paths: ${{ github.workspace }}/target/site/jacoco/index.xml
-        token: ${{ secrets.GITHUB_TOKEN }
+        paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}

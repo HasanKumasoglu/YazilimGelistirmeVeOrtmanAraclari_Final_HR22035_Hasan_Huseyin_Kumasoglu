@@ -35,26 +35,18 @@ public class RestVeriMarket {
 
     }
 
-    public static UrunBilgi urunBul(@PathVariable int no) {
-
-        for (UrunBilgi urunBilgi: URUN_LIST) {
-            if (urunBilgi.ID == no ) {
-                return urunBilgi;
-            }
-        }
-
-        return null;
-
-    }
-
 
     @DeleteMapping("/urunSilme/{IDx}")
     public static UrunBilgi urunSil(@PathVariable int IDx) {
 
-        UrunBilgi urunBilgi = urunBul(IDx);
+        for (UrunBilgi urunBilgi: URUN_LIST) {
+            if (urunBilgi.ID == IDx ) {
 
-        if (urunBilgi != null) {
-            URUN_LIST.remove(urunBilgi);
+                URUN_LIST.remove(urunBilgi);
+
+                return urunBilgi;
+
+            }
         }
 
         return null;

@@ -11,6 +11,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      pull-requests: 'write'
+      contents: read
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17 corretto
@@ -21,8 +25,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Upload Code Coverage Results
-      uses: actions/upload-artifact@v2
+    - name: Coverage
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.3
       with:
-        name: jacoco-report
-        path: target/site/jacoco/index.html
+        paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
